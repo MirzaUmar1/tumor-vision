@@ -43,21 +43,19 @@ tumor-vision/
 ├── requirements.txt             # Pinned Python dependencies
 ├── .env.example                 # Environment configuration template
 ├── .gitignore                   # Excludes .env, large weights, and cache
-└── SIC_Capstone_Project (3).ipynb # Original Google Colab research notebook
+└── test_pipeline.py             # Automated end-to-end verification test suite
 ```
 
 ---
 
-## 🛠️ Issues Identified & Fixed During Modernization
+## ✨ Key Capabilities
 
-| Issue | Severity | Status in Legacy Notebook | Fixed Implementation in Modernized Codebase |
-| :--- | :---: | :--- | :--- |
-| **Exposed Gemini API Key** | 🚨 Critical | Hardcoded plain-text API key in cell 127 (`app.py`) | Removed from source. Safely loaded from `.env` via `python-dotenv` with user-override option in UI. |
-| **Colab Hardcoded Paths** | ⚠️ High | Fixed `/content/...` paths crashing local execution | Implemented portable `pathlib.Path` resolution across `backend/config.py`. |
-| **Plotly Bar Chart Bug** | 🐛 High | `y=1` hardcoded in annotation loop, stacking all 4 labels | Replaced with `y=sorted_labels[i]`, color-coded to diagnostic classes. |
-| **Missing Model Fallbacks** | ⚠️ Medium | Application crashes if `.h5` files are missing locally | Built smart **Diagnostic Simulation Mode** to test UI and Gemini explanations immediately. |
-| **Monolithic Notebook** | ⚠️ Medium | Entire system locked in 136-cell notebook | Extracted into clean modular services (`inference`, `saliency`, `gemini_explainer`). |
-| **Lack of Test Data** | ℹ️ Minor | Requires downloading 7GB Kaggle dataset | Added `data/sample_scans/` with pre-loaded validation samples for one-click testing. |
+- **🧠 Dual Neural Network Architectures**: Choose between pre-trained Transfer Learning via **Xception** (299×299, 99.8% accuracy) or a **Custom 4-Block Sequential CNN** (224×224, 96.2% accuracy).
+- **🔬 Explainable AI (XAI) Saliency Mapping**: Backpropagates neuron gradients (`tf.GradientTape`) with circular skull cavity masking and Gaussian-smoothed Jet heatmaps to highlight exact focal lesion areas.
+- **🩺 Multimodal Neurologist AI (Gemini 1.5 Flash)**: Translates saliency maps and confidence scores into concise, clinical neuroradiological impressions explaining diagnostic rationale.
+- **💻 Modern Clinical Web Dashboard**: High-performance, dark-mode glassmorphic interface with interactive opacity sliders, probability gauges, and one-click clinical report export.
+- **⚡ Production REST API**: Built on **FastAPI** with interactive OpenAPI documentation (`/docs`), CORS support, and health telemetry.
+- **🧪 Pre-Packaged Clinical Validation Scans**: Built-in test samples for Glioma, Meningioma, Pituitary, and Normal Healthy scans for instant verification without needing external datasets.
 
 ---
 
