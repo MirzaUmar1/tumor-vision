@@ -1,0 +1,27 @@
+# Python & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Jupyter & Checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Models & Large Artifacts (Place downloaded model weights here)
+backend/models/*.h5
+backend/models/*.keras
+*.weights.h5
+saliency_maps/
+temp_uploads/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
