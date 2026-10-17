@@ -15,6 +15,32 @@ In addition to categorical classification, TumorVision features visual **gradien
 
 ---
 
+## 🔄 Diagnostic Pipeline Flowchart
+
+```mermaid
+flowchart TD
+    A["Brain MRI Scan (JPG / PNG)"] --> B{"Model Selection"}
+    B -->|"Transfer Learning (299×299)"| C["Xception Backbone + Dense Head"]
+    B -->|"Custom CNN (224×224)"| D["4-Block Conv2D + L2 Regularization"]
+    
+    C --> E["Softmax Probabilities (4 Diagnostic Classes)"]
+    D --> E
+    E --> F["Predicted Diagnosis & Confidence Score"]
+    
+    A --> G["tf.GradientTape Feature Attribution"]
+    G --> H["Intracranial Skull Masking + Gaussian Smoothing + Jet Colormap"]
+    
+    H --> I["Google Gemini 1.5 Flash Multimodal Agent"]
+    F --> I
+    I --> J["Neuroradiological Clinical Assessment"]
+    
+    F --> K["Interactive Web Portal & FastAPI Service"]
+    H --> K
+    J --> K
+```
+
+---
+
 ## 🏗️ Project Architecture
 
 ```
